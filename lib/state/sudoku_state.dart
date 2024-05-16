@@ -11,8 +11,7 @@ part 'sudoku_state.g.dart';
 
 final Logger log = Logger();
 
-///
-/// global constant
+/// global const
 class _Default {
   static const int life = 3;
   static const int hint = 2;
@@ -44,31 +43,31 @@ class SudokuState extends Model {
   @HiveField(1)
   Sudoku? sudoku;
 
-  // level
+  // түвшин
   @HiveField(2)
   Level? level;
 
-  // timing
+  // цаг
   @HiveField(3)
   late int timing;
 
-  // 可用生命
+  // боломжит амь
   @HiveField(4)
   late int life;
 
-  // 可用提示
+  // боломжит tips
   @HiveField(5)
   late int hint;
 
-  // sudoku 填写记录
+  // судоку бичлэгийг бөглөх
   @HiveField(6)
   late List<int> record;
 
-  // 笔记
+  // notes
   @HiveField(7)
   late List<List<bool>> mark;
 
-  // 是否完成
+  // done?
   bool get isComplete {
     if (sudoku == null) {
       return false;
@@ -150,12 +149,12 @@ class SudokuState extends Model {
       return;
     }
     this.record[index] = num;
-    // 清空笔记
+    // Clear notes
     cleanMark(index);
 
-    /// 更新填写记录,笔记清除
-    /// 清空当前index笔记
-    /// 移除 zone row col 中的对应笔记
+    /// Update filling records and clear notes
+    /// Clear current index notes
+    /// Бүсийн эгнээний колон дээрх харгалзах тэмдэглэлийг устгана уу
 
     List<int> colIndexes = Matrix.getColIndexes(Matrix.getCol(index));
     List<int> rowIndexes = Matrix.getRowIndexes(Matrix.getRow(index));
@@ -218,7 +217,7 @@ class SudokuState extends Model {
       return;
     }
 
-    // 清空数字
+    // Clear numbers
     cleanRecord(index);
 
     List<bool> markPoint = this.mark[index];
@@ -274,7 +273,7 @@ class SudokuState extends Model {
     notifyListeners();
   }
 
-  // 检查该数字是否还有库存(判断是否填写满)
+  // Дугаар нь хадгалагдаж байгаа эсэхийг шалгана уу (дүүрсэн эсэхийг тодорхойлох)
   bool hasNumStock(int num) {
     if (this.status == SudokuGameStatus.initialize) {
       throw new ArgumentError("can't check num stock in \"initialize\" status");
@@ -296,8 +295,7 @@ class SudokuState extends Model {
     log.d("hive persistent");
   }
 
-  ///
-  /// resume SudokuState from db(hive)
+  /// db(hive)-аас SudokuState-г үргэлжлүүлэх
   static Future<SudokuState> resumeFromDB() async {
     await _initHive();
 

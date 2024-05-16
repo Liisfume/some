@@ -166,7 +166,7 @@ class _BootstrapPageState extends State<BootstrapPage> {
                     width: 280,
                     height: 280,
                     child: Image(
-                      image: AssetImage("assets/image/Drawing.png"),
+                      image: AssetImage("assets/image/simple_sudoku_logo.png"),
                     ))),
             Expanded(
                 flex: 1,

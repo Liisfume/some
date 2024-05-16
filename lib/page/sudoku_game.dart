@@ -19,7 +19,7 @@ final Logger log = Logger();
 
 final ButtonStyle flatButtonStyle = TextButton.styleFrom(
   foregroundColor: Colors.black54,
-  shadowColor: Colors.blue,
+  shadowColor: Colors.green,
   minimumSize: Size(88, 36),
   padding: EdgeInsets.symmetric(horizontal: 16.0),
   shape: const RoundedRectangleBorder(
@@ -30,7 +30,7 @@ final ButtonStyle flatButtonStyle = TextButton.styleFrom(
 final ButtonStyle primaryFlatButtonStyle = TextButton.styleFrom(
   foregroundColor: Colors.white,
   backgroundColor: Colors.lightBlue,
-  shadowColor: Colors.blue,
+  shadowColor: Colors.green,
   minimumSize: Size(88, 36),
   padding: EdgeInsets.symmetric(horizontal: 16.0),
   shape: const RoundedRectangleBorder(
@@ -39,12 +39,12 @@ final ButtonStyle primaryFlatButtonStyle = TextButton.styleFrom(
 );
 
 const Image ideaPng = Image(
-  image: AssetImage("assets/image/icon_idea.png"),
+  image: AssetImage("assets/image/idea.png"),
   width: 25,
   height: 25,
 );
 const Image lifePng = Image(
-  image: AssetImage("assets/image/icon_life.png"),
+  image: AssetImage("assets/image/heart.png"),
   width: 25,
   height: 25,
 );
@@ -68,7 +68,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
   _aboutDialogAction(BuildContext context) {
     Widget appIcon = GestureDetector(
         child: Image(
-            image: AssetImage("assets/image/sudoku_logo.png"),
+            image: AssetImage("assets/image/simple_sudoku_logo.png"),
             width: 45,
             height: 45),
         onDoubleTap: () {
@@ -76,7 +76,8 @@ class _SudokuGamePageState extends State<SudokuGamePage>
             return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image(image: AssetImage("assets/image/sudoku_logo.png")),
+                  Image(
+                      image: AssetImage("assets/image/simple_sudoku_logo.png")),
                   CupertinoButton(
                     child: Text("Sudoku"),
                     onPressed: () {
@@ -93,21 +94,20 @@ class _SudokuGamePageState extends State<SudokuGamePage>
         children: <Widget>[
           GestureDetector(
             child: Text(
-              "DONE BY:",
-              style: TextStyle(color: Colors.blue),
+              "MAKE BY:",
+              style: TextStyle(color: Colors.green),
             ),
             onTap: () async {
-              if (await canLaunchUrlString(Constant.githubRepository)) {
+              if (await canLaunchUrlString(Constant.githubRepository1)) {
                 if (Platform.isAndroid) {
-                  await launchUrlString(Constant.githubRepository,
+                  await launchUrlString(Constant.githubRepository2,
                       mode: LaunchMode.platformDefault);
                 } else {
-                  await launchUrlString(Constant.githubRepository,
+                  await launchUrlString(Constant.githubRepository3,
                       mode: LaunchMode.externalApplication);
                 }
               } else {
-                log.e(
-                    "can't open browser to url : ${Constant.githubRepository}");
+                log.e("cant open it: ${Constant.githubRepository4}");
               }
             },
           ),
@@ -117,9 +117,8 @@ class _SudokuGamePageState extends State<SudokuGamePage>
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Sudoku powered by Flutter",
-                        style: TextStyle(fontSize: 12)),
-                    Text(Constant.githubRepository,
+                    Text("Flutter Sudoku", style: TextStyle(fontSize: 12)),
+                    Text(Constant.githubRepository4,
                         style: TextStyle(fontSize: 12))
                   ]))
         ]);
@@ -159,13 +158,13 @@ class _SudokuGamePageState extends State<SudokuGamePage>
       playSoundEffect = SoundEffect.gameOver;
     }
 
-    // route to game over show widget page
+    // шоуны виджет хуудас дээр тоглоом руу чиглүүлэх
     PageRouteBuilder gameOverPageRouteBuilder = PageRouteBuilder(
         opaque: false,
         pageBuilder: (BuildContext context, animation, _) {
-          // sound effect : victory or failure
+          // дууны эффект: ялалт эсвэл бүтэлгүйтэл
           playSoundEffect();
-          // game over show widget
+          // шоу виджет дээр тоглоом
           Widget gameOverWidget = Scaffold(
               backgroundColor: Colors.white.withOpacity(0.85),
               body: Align(
@@ -197,7 +196,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                                 margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
                                 child: Text(
                                     "$elapsedTimeText : ${_state.timer}'s",
-                                    style: TextStyle(color: Colors.blue))),
+                                    style: TextStyle(color: Colors.green))),
                             Container(
                                 padding: EdgeInsets.all(10),
                                 child: Row(
@@ -229,8 +228,8 @@ class _SudokuGamePageState extends State<SudokuGamePage>
     String signal = await Navigator.of(context).push(gameOverPageRouteBuilder);
     switch (signal) {
       case "ad":
-        // @TODO give extra life logic coding
-        // may do something to give user extra life , like watch ad video / make comment of this app ?
+        // @TODO нэмэлт амьдралын логик кодчилол өгдөг
+        // Зар сурталчилгааны видео үзэх / энэ програмын талаар сэтгэгдэл бичих гэх мэт хэрэглэгчдэд нэмэлт амьдрал өгөх ямар нэг зүйл хийж чадах уу?
         break;
       case "exit":
       default:
@@ -251,31 +250,23 @@ class _SudokuGamePageState extends State<SudokuGamePage>
         fillOnPressed = () async {
           log.d("input : $num");
           if (_isOnlyReadGrid(_chooseSudokuBox)) {
-            // 非填空项
             return;
           }
           if (_state.status != SudokuGameStatus.gaming) {
-            // 未在游戏进行时
             return;
           }
           if (_markOpen) {
-            /// markOpen , mean use mark notes
-            log.d("填写笔记");
+            log.d("fill in notes");
             _state.switchMark(_chooseSudokuBox, num);
           } else {
-            // 填写数字
             _state.switchRecord(_chooseSudokuBox, num);
-            // 判断真伪
             if (_state.record[_chooseSudokuBox] != -1 &&
                 _state.sudoku!.solution[_chooseSudokuBox] != num) {
-              // 填入错误数字 wrong answer on _chooseSudokuBox with num
               _state.lifeLoss();
               if (_state.life <= 0) {
-                // 游戏结束
                 return _gameOver();
               }
 
-              // "\nWrong Input\nYou can't afford ${_state.life} more turnovers"
               String wrongInputAlertText =
                   AppLocalizations.of(context)!.wrongInputAlertText;
               wrongInputAlertText = wrongInputAlertText.replaceFirst(
@@ -285,7 +276,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
               showCupertinoDialog(
                   context: context,
                   builder: (context) {
-                    // sound stuff error
+                    // дуу чимээний алдаа
                     SoundEffect.stuffError();
                     return CupertinoAlertDialog(
                       title: Text("Oops..."),
@@ -342,14 +333,14 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                 onPressed: () {
                   log.d("""
                   when ${_chooseSudokuBox + 1} is not a puzzle , then clean the choose \n
-                  清除 ${_chooseSudokuBox + 1} 选型 , 如果他不是固定值的话
+                  clear ${_chooseSudokuBox + 1} selection , if it is not a fixed value
                   """);
                   if (_isOnlyReadGrid(_chooseSudokuBox)) {
-                    // read only item , skip it - 只读格
+                    // зөвхөн унших зүйл, алгасах - зөвхөн унших сүлжээ
                     return;
                   }
                   if (_state.status != SudokuGameStatus.gaming) {
-                    // not playing , skip it - 未在游戏进行时
+                    // тоглохгүй, алгасах - тоглоом явагдаж байх үед биш
                     return;
                   }
                   _state.cleanMark(_chooseSudokuBox);
@@ -368,13 +359,13 @@ class _SudokuGamePageState extends State<SudokuGamePage>
   }
 
   Widget _toolZone(BuildContext context) {
-    // pause button tap function
+    // түр зогсоох товчлуур товших функц
     var pauseOnPressed = () {
       if (_state.status != SudokuGameStatus.gaming) {
         return;
       }
 
-      // 标记手动暂停
+      // Гарын авлагын түр зогсолтыг тэмдэглэ
       setState(() {
         _manualPause = true;
       });
@@ -389,18 +380,18 @@ class _SudokuGamePageState extends State<SudokuGamePage>
               })).then((_) {
         _gaming();
 
-        // 解除手动暂停
+        // Гараар түр зогсоохыг буцаах
         setState(() {
           _manualPause = false;
         });
       });
     };
 
-    // tips button tap function
+    // зөвлөмж товч товших функц
     var tipsOnPressed;
     if (_state.hint > 0) {
       tipsOnPressed = () {
-        // tips next cell answer
+        // дараагийн үүрэнд хариулах зөвлөмжүүд
         log.d("top tips button");
         int hint = _state.hint;
         if (hint <= 0) {
@@ -409,7 +400,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
         List<int> puzzle = _state.sudoku!.puzzle;
         List<int> solution = _state.sudoku!.solution;
         List<int> record = _state.record;
-        // random point tips
+        // санамсаргүй цэгийн зөвлөмжүүд
         int randomBeginPoint = new Random().nextInt(puzzle.length);
         for (int i = 0; i < puzzle.length; i++) {
           int index = (i + randomBeginPoint) % puzzle.length;
@@ -425,14 +416,14 @@ class _SudokuGamePageState extends State<SudokuGamePage>
       };
     }
 
-    // mark button tap function
+    // тэмдэг товчлуурын функц
     var markOnPressed = () {
-      log.d("enable mark function - 启用笔记功能");
+      log.d("enable mark function");
       setState(() {
         _markOpen = !_markOpen;
       });
     };
-    // define i18n text begin
+    // i18n текстийн эхлэлийг тодорхойлно
     var exitGameText = AppLocalizations.of(context)!.exitGameText;
     var cancelText = AppLocalizations.of(context)!.cancelText;
     var pauseText = AppLocalizations.of(context)!.pauseText;
@@ -440,7 +431,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
     var enableMarkText = AppLocalizations.of(context)!.enableMarkText;
     var closeMarkText = AppLocalizations.of(context)!.closeMarkText;
     var exitGameContentText = AppLocalizations.of(context)!.exitGameContentText;
-    // define i18n text end
+    // i18n текстийн төгсгөлийг тодорхойлно
     var exitGameOnPressed = () async {
       await showDialog(
           context: context,
@@ -468,18 +459,18 @@ class _SudokuGamePageState extends State<SudokuGamePage>
           }).then((val) {
         bool confirm = val;
         if (confirm == true) {
-          // exit the game 退出游戏
+          // тоглоомоос гарах
           ScopedModel.of<SudokuState>(context).initialize();
           Navigator.pop(context);
         }
       });
     };
     return Container(
-        decoration: BoxDecoration(color: Colors.blue[100]),
+        decoration: BoxDecoration(color: Colors.green[100]),
         height: 192.3,
         padding: EdgeInsets.all(5),
         child: Row(children: <Widget>[
-          // 暂停游戏
+          // тоглоомыг түр зогсоох
           Expanded(
               flex: 1,
               child: Align(
@@ -488,7 +479,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                       padding: EdgeInsets.all(5),
                       onPressed: pauseOnPressed,
                       child: Text(pauseText, style: TextStyle(fontSize: 20))))),
-          // tips 提示
+          // tips
           Expanded(
               flex: 1,
               child: Align(
@@ -497,7 +488,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                       padding: EdgeInsets.all(5),
                       onPressed: tipsOnPressed,
                       child: Text(tipsText, style: TextStyle(fontSize: 20))))),
-          // mark 笔记
+          // mark
           Expanded(
               flex: 1,
               child: Align(
@@ -508,7 +499,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                       child: Text(
                           "${_markOpen ? closeMarkText : enableMarkText}",
                           style: TextStyle(fontSize: 20))))),
-          // 退出
+
           Expanded(
               flex: 1,
               child: Align(
@@ -526,7 +517,6 @@ class _SudokuGamePageState extends State<SudokuGamePage>
     return new WillPopScope(child: child, onWillPop: onWillPop);
   }
 
-  /// 计算网格背景色
   Color _gridInWellBgColor(int index) {
     Color gridWellBackgroundColor;
     // same zones
@@ -556,9 +546,6 @@ class _SudokuGamePageState extends State<SudokuGamePage>
     return gridWellBackgroundColor;
   }
 
-  ///
-  /// 正常网格控件
-  ///
   Widget _gridInWellWidget(
       BuildContext context, int index, int num, GestureTapCallback onTap) {
     Sudoku sudoku = _state.sudoku!;
@@ -577,8 +564,8 @@ class _SudokuGamePageState extends State<SudokuGamePage>
       }
     }
     return InkWell(
-        highlightColor: Colors.blue,
-        customBorder: Border.all(color: Colors.blue),
+        highlightColor: Colors.green,
+        customBorder: Border.all(color: Colors.green),
         child: Center(
           child: Container(
             alignment: Alignment.center,
@@ -606,7 +593,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
   Widget _markGridWidget(
       BuildContext context, int index, GestureTapCallback onTap) {
     Widget markGrid = InkWell(
-        highlightColor: Colors.blue,
+        highlightColor: Colors.green,
         customBorder: Border.all(color: Colors.blue),
         onTap: onTap,
         child: Container(
@@ -636,7 +623,6 @@ class _SudokuGamePageState extends State<SudokuGamePage>
     return markGrid;
   }
 
-  // well onTop function
   _wellOnTapBuilder(index) {
     // log.d("_wellOnTapBuilder build $index ...");
     return () {
@@ -713,7 +699,6 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                   num = _state.sudoku!.puzzle[index];
                 }
 
-                // 用户做标记
                 bool isUserMark = _state.sudoku!.puzzle[index] == -1 &&
                     _state.mark[index].any((element) => element);
 
@@ -726,9 +711,9 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                     context, index, num, _wellOnTapBuilder(index));
               })),
 
-          /// user input zone
-          /// use fillZone choose number fill cells or mark notes
-          /// use toolZone to pause / exit game
+          /// хэрэглэгчийн оруулах бүс
+          /// fillZone ашиглан тоогоор дүүргэх нүдийг сонгох эсвэл тэмдэглэл тэмдэглэх
+          /// Тоглоомыг түр зогсоох / гарахын тулд toolZone ашиглана уу
           Container(margin: EdgeInsets.fromLTRB(0, 5, 0, 5)),
           _fillZone(context),
           _toolZone(context)
