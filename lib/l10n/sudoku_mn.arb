@@ -20,7 +20,7 @@
   "gameStatusVictory": "Ялалт",
   "wrongInputAlertText": "Буруу оролт",
   "gotItText": "Авчихсан",
-  "levelText": "Түвшин",
+  "levelText": "level",
   "tipsText": "Зөвлөмжүүд",
   "enableMarkText": "Тэмдэглэлийг нээх",
   "closeMarkText": "Тэмдэглэлийг хаах",
@@ -33,6 +33,6 @@
   "pauseGameText": "Завсарласан",
   "elapsedTimeText": "зарцуулсан цаг",
   "continueGameContentText": "Үргэлжлүүлэхийн тулд дэлгэцэн дээр давхар товшино уу",
-  "winnerConclusionText": "[%түвшин%] судоку сорилтыг дуусгасанд баяр хүргэе!",
-  "failureConclusionText": "Харамсалтай нь энэ удаагийн [%түвшин%] судокугийн алдаа хэт олон удаа гарсан тул сорилт амжилтгүй боллоо!"
+  "winnerConclusionText": "[%level%] судоку сорилтыг дуусгасанд баяр хүргэе!",
+  "failureConclusionText": "Харамсалтай нь энэ удаагийн [%level%] судокугийн алдаа хэт олон удаа гарсан тул сорилт амжилтгүй боллоо!"
 }

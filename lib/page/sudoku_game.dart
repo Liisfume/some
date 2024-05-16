@@ -278,7 +278,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                     // дуу чимээний алдаа
                     SoundEffect.stuffError();
                     return CupertinoAlertDialog(
-                      title: Text("Oops..."),
+                      title: Text("Oopsie..."),
                       content: Text(wrongInputAlertText),
                       actions: [
                         CupertinoDialogAction(
@@ -649,8 +649,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          /// status zone
-          /// life / tips / timer on here
+          /// life
           Container(
             height: 80,
             padding: EdgeInsets.all(10.0),
@@ -684,8 +683,6 @@ class _SudokuGamePageState extends State<SudokuGamePage>
             ]),
           ),
 
-          /// 9 x 9 cells sudoku puzzle board
-          /// the whole sudoku game draw it here
           GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,

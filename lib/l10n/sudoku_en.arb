@@ -1,7 +1,7 @@
 {
   "menuNewGame": "New Game",
   "@menuNewGame": {
-    "description": "menu of 'new gme' button text"
+    "description": "menu of 'new game' button text"
   },
   "menuContinueGame": "Continue Game",
   "@menuContinueGame": {
@@ -12,20 +12,20 @@
   "levelMedium": "Medium",
   "levelHard": "Hard",
   "levelExpert": "Expert",
-  "sudokuGenerateText": "Waiting for sudoku generated...",
+  "sudokuGenerateText": "Sudoku reading...",
   "gameStatusInitialize": "Initialize",
   "gameStatusGaming": "Gaming",
   "gameStatusPause": "Pause",
   "gameStatusFailure": "Failure",
   "gameStatusVictory": "Victory",
-  "wrongInputAlertText": "Wrong Input\nYou can't afford %attempts% more turnovers",
-  "gotItText": "Got It",
+  "wrongInputAlertText": "Wrong input",
+  "gotItText": "Ok",
   "levelText": "Level",
   "tipsText": "Random Tips",
   "enableMarkText": "Enable Note",
   "closeMarkText": "Close Note",
   "exitGameText": "Exit Game",
-  "exitGameContentText": "Whether to end this round of Sudoku ?",
+  "exitGameContentText": "Complete this level?",
   "openText": "Open",
   "cancelText": "Cancel",
   "pauseText": "Pause Game",
@@ -33,6 +33,6 @@
   "pauseGameText": "Paused",
   "elapsedTimeText": "elapsed time",
   "continueGameContentText": "Double click the screen to continue playing",
-  "winnerConclusionText": "Congratulations on completing the [%level%] Sudoku challenge!",
-  "failureConclusionText": "Unfortunately, this round of [%level%] Sudoku errors too many times, challenge failed!"
+  "winnerConclusionText": "Congratulation, you got [%level%] level",
+  "failureConclusionText": "Unfortunately, you couldn't complete [%level%] level!"
 }
