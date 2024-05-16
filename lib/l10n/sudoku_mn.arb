@@ -1,0 +1,38 @@
+{
+  "menuNewGame": "Шинэ тоглоом",
+  "@menuNewGame": {
+    "description": "Шинэ тоглоом товчлуурын текстийн цэс"
+  },
+  "menuContinueGame": "Тоглоомыг үргэлжлүүлэх",
+  "@menuContinueGame": {
+    "description": "Тоглоомыг үргэлжлүүлэх товчлуурын текстийн цэс"
+  },
+  "levelCancel": "Цуцлах",
+  "levelEasy": "Хялбар",
+  "levelMedium": "Дунд",
+  "levelHard": "Хүнд",
+  "levelExpert": "Бүр хүнд",
+  "sudokuGenerateText": "Судоку үүсэхийг хүлээж байна...",
+  "gameStatusInitialize": "Эхлүүлэх",
+  "gameStatusGaming": "Тоглох",
+  "gameStatusPause": "Завсарлах",
+  "gameStatusFailure": "Бүтэлгүйтсэн",
+  "gameStatusVictory": "Ялалт",
+  "wrongInputAlertText": "Буруу оролт",
+  "gotItText": "Авчихсан",
+  "levelText": "Түвшин",
+  "tipsText": "Зөвлөмжүүд",
+  "enableMarkText": "Тэмдэглэлийг нээх",
+  "closeMarkText": "Тэмдэглэлийг хаах",
+  "exitGameText": "Гарах",
+  "exitGameContentText": "Судокугийн энэ тойргийг дуусгах уу?",
+  "openText": "Нээх",
+  "cancelText": "Цуцлах",
+  "pauseText": "Тоглоомыг завсарлах",
+  "markText": "Тэмдэг",
+  "pauseGameText": "Завсарласан",
+  "elapsedTimeText": "зарцуулсан цаг",
+  "continueGameContentText": "Үргэлжлүүлэхийн тулд дэлгэцэн дээр давхар товшино уу",
+  "winnerConclusionText": "[%түвшин%] судоку сорилтыг дуусгасанд баяр хүргэе!",
+  "failureConclusionText": "Харамсалтай нь энэ удаагийн [%түвшин%] судокугийн алдаа хэт олон удаа гарсан тул сорилт амжилтгүй боллоо!"
+}

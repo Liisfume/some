@@ -72,7 +72,7 @@ Future _sudokuGenerate(BuildContext context, Level level) async {
   isolate.kill(priority: Isolate.immediate);
   log.d("receivePort.listen done!");
 
-  // dismiss dialog
+  // харилцах цонхыг хаах
   Navigator.pop(context);
 }
 
@@ -82,14 +82,14 @@ Widget _newGameButton(BuildContext context) {
     child: _buttonWrapper(
         context,
         (_) => CupertinoButton(
-            color: Colors.black,
+            color: Colors.grey,
             child: Text(
               AppLocalizations.of(context)!.menuNewGame,
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             onPressed: () {
-              // cancel new game button
+              // шинэ тоглоомыг цуцлах товч
               Widget cancelButton = SizedBox(
                   height: 60,
                   width: MediaQuery.of(context).size.width,
@@ -103,7 +103,7 @@ Widget _newGameButton(BuildContext context) {
                         },
                       )));
 
-              // iterative difficulty build buttons
+              // давтагдах хүндрэлтэй бүтээх товчлуурууд
               List<Widget> buttons = [];
               Level.values.forEach((Level level) {
                 String levelName =
@@ -152,28 +152,28 @@ class _BootstrapPageState extends State<BootstrapPage> {
   @override
   Widget build(BuildContext context) {
     Widget body = Container(
-        color: Colors.white,
+        color: Colors.black,
         padding: EdgeInsets.all(20.0),
         child: Center(
             child: Column(
           children: <Widget>[
-            // logo solih zurag
+            // логоны зураг солих
             Expanded(
                 flex: 1,
                 child: Container(
                     alignment: Alignment.center,
-                    color: Colors.white,
+                    color: Colors.black,
                     width: 280,
                     height: 280,
                     child: Image(
-                      image: AssetImage("assets/image/simple_sudoku_logo.png"),
+                      image: AssetImage("assets/image/sudoku.png"),
                     ))),
             Expanded(
                 flex: 1,
                 child:
                     Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  // continue the game
-                  // new game
+                  // тоглоомыг үргэлжлүүлэх
+                  // шинэ тоглоом
                   _newGameButton(context),
                   // scanner ?
                   _scanButton(context),

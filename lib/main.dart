@@ -36,11 +36,11 @@ class MyApp extends StatelessWidget {
       builder: (context, AsyncSnapshot<SudokuState> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
-              color: Colors.white,
+              color: Colors.black,
               alignment: Alignment.center,
               child: Center(
                   child: Text('Sudoku Application initializing...',
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.grey),
                       textDirection: TextDirection.ltr)));
         }
         if (snapshot.hasError) {

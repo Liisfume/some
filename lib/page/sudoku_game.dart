@@ -68,7 +68,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
   _aboutDialogAction(BuildContext context) {
     Widget appIcon = GestureDetector(
         child: Image(
-            image: AssetImage("assets/image/simple_sudoku_logo.png"),
+            image: AssetImage("assets/image/sudoku_logo.png"),
             width: 45,
             height: 45),
         onDoubleTap: () {
@@ -76,8 +76,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
             return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image(
-                      image: AssetImage("assets/image/simple_sudoku_logo.png")),
+                  Image(image: AssetImage("assets/image/sudoku_logo.png")),
                   CupertinoButton(
                     child: Text("Sudoku"),
                     onPressed: () {
@@ -94,20 +93,20 @@ class _SudokuGamePageState extends State<SudokuGamePage>
         children: <Widget>[
           GestureDetector(
             child: Text(
-              "MAKE BY:",
+              "MADE BY:",
               style: TextStyle(color: Colors.green),
             ),
             onTap: () async {
               if (await canLaunchUrlString(Constant.githubRepository1)) {
                 if (Platform.isAndroid) {
-                  await launchUrlString(Constant.githubRepository2,
+                  await launchUrlString(Constant.githubRepository1,
                       mode: LaunchMode.platformDefault);
                 } else {
-                  await launchUrlString(Constant.githubRepository3,
+                  await launchUrlString(Constant.githubRepository1,
                       mode: LaunchMode.externalApplication);
                 }
               } else {
-                log.e("cant open it: ${Constant.githubRepository4}");
+                log.e("cant open it: ${Constant.githubRepository1}");
               }
             },
           ),
@@ -118,7 +117,7 @@ class _SudokuGamePageState extends State<SudokuGamePage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Flutter Sudoku", style: TextStyle(fontSize: 12)),
-                    Text(Constant.githubRepository4,
+                    Text(Constant.githubRepository2,
                         style: TextStyle(fontSize: 12))
                   ]))
         ]);
